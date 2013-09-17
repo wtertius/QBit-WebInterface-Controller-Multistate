@@ -1,0 +1,15 @@
+<div class="multistate_accessors">
+[% FOR accessor = accessors %]
+    [% IF !loop.first %]&nbsp;|&nbsp;[% END %]
+
+    [% IF request.param('accessor') == accessor %]
+        [% accessor | html %]
+    [% ELSE %]
+    <a href="[% cmd_link('', '', accessor => accessor) | html %]">[% accessor | html %]</a>
+    [% END %]
+[% END %]
+</div>
+
+[% IF request.param('accessor') %]
+<img src="[% cmd_link('graph_image', '', accessor => accessor) | html %]" />
+[% END %]

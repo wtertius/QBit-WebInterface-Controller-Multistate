@@ -19,25 +19,26 @@ sub graph : CMD : DEFAULT {
 
     return $self->denied() unless $self->check_rights('multistate_graph_view');
 
-    my @accessors =
-      grep {$self->app->$_->isa('QBit::Application::Model::Multistate')} keys(%{$self->app->get_models()});
+    my $models = $self->app->get_models();
 
-    return $self->from_template('multistate/graph.tt2', vars => {accessors => \@accessors});
-}
+    my @accessors;
+    while (my ($accessor, $package) = each(%$models)) {
+        push(@accessors, $accessor) if $package->isa('QBit::Application::Model::Multistate');
+    }
 
-sub graph_image : CMD {
-    my ($self) = @_;
+    my $graph_svg = '';
+    my $accessor  = $self->request->param('accessor');
+    if (   defined($accessor)
+        && $self->app->can($accessor)
+        && $self->app->$accessor->isa('QBit::Application::Model::Multistate'))
+    {
+        $graph_svg =
+          $self->app->$accessor->get_multistates_graph(private_names => $self->request->param('private_names'))
+          ->as_svg();
+        $graph_svg =~ s/^.+?<svg/<svg style="max-width: 100%;" onclick="this.style.maxWidth=''"/s;
+    }
 
-    return $self->denied() unless $self->check_rights('multistate_graph_view');
-
-    my %accessors = map {$_ => 1}
-      grep {$self->app->$_->isa('QBit::Application::Model::Multistate')} keys(%{$self->app->get_models()});
-
-    my $accessor = $self->request->param('accessor', '');
-    return $self->response->status(404) unless $accessors{$accessor};
-
-    $self->response->content_type('image/png');
-    return $self->response->data(\$self->app->$accessor->get_multistates_graph()->as_png());
+    return $self->from_template('multistate/graph.tt2', vars => {accessors => \@accessors, graph_svg => $graph_svg});
 }
 
 TRUE;

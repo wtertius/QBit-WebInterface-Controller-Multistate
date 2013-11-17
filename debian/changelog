@@ -1,3 +1,9 @@
+libqbit-webinterface-controller-multistate-perl (0.002) raring; urgency=low
+
+  * Switched to SVG
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Sun, 17 Nov 2013 17:42:41 +0400
+
 libqbit-webinterface-controller-multistate-perl (0.001) raring; urgency=low
 
   * Initial commit

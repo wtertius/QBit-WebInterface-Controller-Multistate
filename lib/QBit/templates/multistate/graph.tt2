@@ -1,3 +1,4 @@
+[% WRAPPER page %]
 <ul class="nav nav-pills">
   [% FOR accessor = accessors %]
   <li [% IF request.param('accessor') == accessor +%] class="active"[% END %]>
@@ -21,3 +22,4 @@
 </div>
 
 [% graph_svg %]
+[% END %]

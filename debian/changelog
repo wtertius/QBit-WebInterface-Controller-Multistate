@@ -1,3 +1,9 @@
+libqbit-webinterface-controller-multistate-perl (0.003) raring; urgency=low
+
+  * Fixed for QBit::WebInterface 0.010
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Thu, 16 Jan 2014 19:25:26 +0400
+
 libqbit-webinterface-controller-multistate-perl (0.002) raring; urgency=low
 
   * Switched to SVG

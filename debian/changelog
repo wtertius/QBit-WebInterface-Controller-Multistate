@@ -1,3 +1,9 @@
+libtertiusqbit-webinterface-controller-multistate-perl (0.004) raring; urgency=low
+
+  * Rename debian package
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Mon, 20 Apr 2015 12:56:26 +0300
+
 libtertiusqbit-webinterface-controller-multistate-perl (0.003) raring; urgency=low
 
   * Fixed for TertiusQBit::WebInterface 0.010
